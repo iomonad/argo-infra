@@ -33,8 +33,8 @@ jobs:
         include:
           - dockerfile: runtimes/alpine-gdal/Dockerfile
             image: ghcr.io/iomonad/alpine-gdal-runtime
-          - dockerfile: runtimes/alpine-gdal/Dockerfile
-            image: ghcr.io/iomonad/alpine-gdal-runtime-dev
+          - dockerfile: jobs/geotiff-tiler/Dockerfile
+            image: ghcr.io/iomonad/argo-tiler
 
     steps:
       - name: Checkout repository
