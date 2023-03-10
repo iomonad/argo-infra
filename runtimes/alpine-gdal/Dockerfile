@@ -1,4 +1,4 @@
-FROM osgeo/gdal:alpine-small-latest
+FROM osgeo/gdal:alpine-normal-latest
 MAINTAINER iomonad "iomonad@riseup.net"
 
 #######################################
