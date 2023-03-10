@@ -31,9 +31,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - dockerfile: runtimes/alpine-gdal
+          - dockerfile: runtimes/alpine-gdal/Dockerfile
             image: ghcr.io/iomonad/alpine-gdal-runtime
-          - dockerfile: runtimes/alpine-gdal
+          - dockerfile: runtimes/alpine-gdal/Dockerfile
             image: ghcr.io/iomonad/alpine-gdal-runtime-dev
 
     steps:
