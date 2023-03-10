@@ -1,0 +1,49 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: argo-tiler
+spec:
+  entrypoint: gdal-tiler
+  #################################
+  arguments:
+    parameters:
+      - name: input_path
+        value: ""
+      - name: ouput_folder
+        value: ""
+      - name: output_name
+        value: ""
+      - name: gdal_profile
+        value: "mercator"
+      - name: gdal_min_zoom
+        value: 9
+      - name: gdal_max_zoom
+        value: 20
+  #################################
+  templates:
+  - name: gdal-tiler
+    container:
+      image: ghcr.io/iomonad/argo-tiler:master
+      resources:
+        limits:
+          memory: 800Mi
+      env:
+        - name: INPUT_PATH
+          value: "{{ worflow.parameters.input_path }}"
+        - name: OUTPUT_FOLDER
+          value: "{{ worflow.parameters.output_folder }}"
+        - name: OUTPUT_NAME
+          value: "{{ worflow.parameters.output_name }}"
+        - name: GDAL_PROFILE
+          value: "{{ worflow.parameters.gdal_profile }}"
+        - name: GDAL_MIN_ZOOM
+          value: "{{ worflow.parameters.gdal_min_zoom }}"
+        - name: GDAL_MAX
+          value: "{{ worflow.parameters.gdal_max_zoom }}"
+  #################################
+  - name: tiler
+    dag:
+      tasks:
+      - name: convert-dat-geotiff
+        template: gdal-tiler
